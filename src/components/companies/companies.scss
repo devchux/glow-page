@@ -1,0 +1,17 @@
+.companies {
+  display: flex;
+  align-items: center;
+  margin: 5em auto;
+  max-width: 1280px;
+  padding: 8em 0;
+  gap: 20px;
+
+  > div {
+    width: 20%;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
