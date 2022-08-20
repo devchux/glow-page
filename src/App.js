@@ -60,9 +60,13 @@ function App() {
         height: 16,
         borderRadius: "50%",
       })
-      .to(".abs-logo", {
-        fontSize: "1.5rem",
-      }, "+=0")
+      .to(
+        ".abs-logo",
+        {
+          fontSize: "1.5rem",
+        },
+        "+=0"
+      )
       .to(".abs-logo", {
         left: (window.screen.width - 1280) / 2,
         top: 24,
@@ -78,22 +82,32 @@ function App() {
         width: "70%",
         top: 765,
       })
+      .to(".layout", {
+        display: "block",
+      })
       .to("body", {
         overflowY: "auto",
-      });
+      })
+      .from(".left-content, header .img-wrapper", {
+        y: document.querySelector("header .left-content").getBoundingClientRect()
+          .height,
+        opacity: 0,
+      }, "-=1");
   }, [tl]);
   return (
     <Fragment>
       <div className="bg-overlay" />
       <Navbar />
-      <Header />
-      <About />
-      <Products />
-      <Metrics />
-      <Faq />
-      <Testimonials />
-      <Companies />
-      <Footer />
+      <div className="lay0out">
+        <Header />
+        <About />
+        <Products />
+        <Metrics />
+        <Faq />
+        <Testimonials />
+        <Companies />
+        <Footer />
+      </div>
     </Fragment>
   );
 }

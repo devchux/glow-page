@@ -1,25 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import "./header.scss";
 import { ReactComponent as StarIcon } from "assets/svg/star.svg";
-import gsap from "gsap";
 
 const Header = () => {
-  const leftContent = useRef(null);
-
-  useEffect(() => {
-    gsap.fromTo(
-      ".left-content, header .img-wrapper",
-      {
-        y: leftContent.current.getBoundingClientRect().height,
-        opacity: 0,
-      },
-      { y: 0, opacity: 1 }
-    );
-  }, []);
-
   return (
     <header>
-      <div className="left-content" ref={leftContent}>
+      <div className="left-content">
         <div className="h3">Let your skin</div>
         <div className="h3">
           Going{" "}
