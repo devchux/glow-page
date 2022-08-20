@@ -81,7 +81,7 @@ function App() {
       .to("body", {
         overflowY: "auto",
       });
-  }, []);
+  }, [tl]);
   return (
     <Fragment>
       <div className="bg-overlay" />
