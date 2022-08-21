@@ -17,29 +17,17 @@ function App() {
     Aos.init();
   }, []);
 
-  const tl = gsap.timeline();
+  const tl = gsap.timeline({ onComplete: () => {
+    gsap.from(
+      ".left-content, header .img-wrapper",
+      {
+        y: document.querySelector('header').getBoundingClientRect().height,
+        opacity: 0,
+      }, '-=1'
+    );
+  }});
 
   useLayoutEffect(() => {
-    // gsap.fromTo(
-    //   ".bg-overlay",
-    //   {
-    //     top: 0,
-    //     bottom: 0,
-    //     width: "100%",
-    //     height: "100%",
-    //     right: 0,
-    //     zIndex: 1,
-    //   },
-    //   {
-    //     bottom: 'auto',
-    //     right: 0,
-    //     zIndex: -1,
-    //     height: 700,
-    //     width: "70%",
-    //     top: 765,
-    //     duration: 3,
-    //   }
-    // );
     tl.from(".abs-logo", {
       left: "30%",
       delay: 1,
@@ -88,11 +76,6 @@ function App() {
       .to("body", {
         overflowY: "auto",
       })
-      .from(".left-content, header .img-wrapper", {
-        y: document.querySelector("header .left-content").getBoundingClientRect()
-          .height,
-        opacity: 0,
-      }, "-=1");
   }, [tl]);
   return (
     <Fragment>
