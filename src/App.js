@@ -17,15 +17,7 @@ function App() {
     Aos.init();
   }, []);
 
-  const tl = gsap.timeline({ onComplete: () => {
-    gsap.from(
-      ".left-content, header .img-wrapper",
-      {
-        y: document.querySelector('header').getBoundingClientRect().height,
-        opacity: 0,
-      }, '-=1'
-    );
-  }});
+  const tl = gsap.timeline();
 
   useLayoutEffect(() => {
     tl.from(".abs-logo", {
@@ -75,7 +67,16 @@ function App() {
       })
       .to("body", {
         overflowY: "auto",
-      })
+      });
+
+    gsap.from(
+      ".left-content, header .img-wrapper",
+      {
+        y: document.querySelector("header").getBoundingClientRect().height,
+        opacity: 0,
+      },
+      "-=1"
+    );
   }, [tl]);
   return (
     <Fragment>
