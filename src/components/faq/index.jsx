@@ -103,7 +103,15 @@ const Faq = () => {
           {data.map((item, i) => {
             return (
               <div key={i} className="title">
-                <div onClick={() => setIndex(i)}>
+                <div
+                  onClick={() => {
+                    if (index === i) {
+                      setIndex(null);
+                    } else {
+                      setIndex(i);
+                    }
+                  }}
+                >
                   <h6>{item.name}</h6>
                   <h6>{index === i ? "-" : "+"}</h6>
                 </div>
