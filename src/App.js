@@ -1,5 +1,5 @@
 import Footer from "components/footer";
-import { Fragment, useEffect, useLayoutEffect } from "react";
+import { Fragment, useEffect, useLayoutEffect, useState } from "react";
 import About from "components/about";
 import Companies from "components/companies";
 import Faq from "components/faq";
@@ -13,11 +13,13 @@ import "aos/dist/aos.css";
 import gsap from "gsap";
 
 function App() {
+  const [startPage, setStartPage] = useState(false);
+
   useEffect(() => {
     Aos.init();
   }, []);
 
-  const tl = gsap.timeline();
+  const tl = gsap.timeline({ onComplete: () => setStartPage(true) });
 
   useLayoutEffect(() => {
     tl.from(".abs-logo", {
@@ -62,36 +64,43 @@ function App() {
         width: "70%",
         top: 765,
       })
-      .to(".layout", {
-        display: "block",
-      })
       .to("body", {
         overflowY: "auto",
       });
-
-    gsap.from(
-      ".left-content, header .img-wrapper",
-      {
-        y: document.querySelector("header").getBoundingClientRect().height,
-        opacity: 0,
-      },
-      "-=1"
-    );
   }, [tl]);
+
+  useEffect(() => {
+    if (startPage) {
+      gsap.fromTo(
+        ".left-content, header .img-wrapper",
+        {
+          y: 770,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+        },
+        "-=6.25"
+      );
+    }
+  }, [startPage]);
   return (
     <Fragment>
       <div className="bg-overlay" />
-      <Navbar />
-      <div className="lay0out">
-        <Header />
-        <About />
-        <Products />
-        <Metrics />
-        <Faq />
-        <Testimonials />
-        <Companies />
-        <Footer />
-      </div>
+      {startPage && (
+        <>
+          <Navbar />
+          <Header />
+          <About />
+          <Products />
+          <Metrics />
+          <Faq />
+          <Testimonials />
+          <Companies />
+          <Footer />
+        </>
+      )}
     </Fragment>
   );
 }
